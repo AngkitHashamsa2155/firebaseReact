@@ -39,20 +39,16 @@ function App() {
   const firebaseUpdate = async () => {
     try {
       const userDoc = doc(db, 'user', editId);
-      const mapData = user.map((item) => {
-        if (item.id === editId) {
-          return {
-            ...item,
-            fullName: formInput.fullName,
-            mobile: formInput.mobile,
-            email: formInput.email,
-            address: formInput.address,
-          };
-        }
-        return item;
-      });
 
-      const newField = mapData.find((item) => item.id === editId);
+      const getData = user.find((item) => item.id === editId);
+      const newField = {
+        ...getData,
+        fullName: formInput.fullName,
+        mobile: formInput.mobile,
+        email: formInput.email,
+        address: formInput.address,
+      };
+      console.log(newField);
       await updateDoc(userDoc, newField);
     } catch (error) {
       console.log(error);
