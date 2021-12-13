@@ -1,7 +1,20 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-const Result = ({ user, handleEdit, handleDeleteDoc }) => {
-  return (
+const Result = ({ user, handleEdit, handleDeleteDoc, isLoading }) => {
+  return isLoading ? (
+    <div
+      style={{
+        display: 'grid',
+        height: '100%',
+        width: '100%',
+        placeItems: 'center',
+      }}
+    >
+      <div class='spinner-border' role='status'>
+        <span class='sr-only'>Loading...</span>
+      </div>
+    </div>
+  ) : (
     <div>
       <table className='table'>
         <thead>

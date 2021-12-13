@@ -19,7 +19,7 @@ function App() {
     email: '',
     address: '',
   });
-
+  const [isLoading, setIsLoading] = useState(true);
   const [fire, setFire] = useState(false);
   const [isEdited, SetIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -43,6 +43,7 @@ function App() {
 
   const firebaseUpdate = async () => {
     try {
+      setIsLoading(true);
       const userDoc = doc(db, 'user', editId);
 
       const { fullName, mobile, email, address } = user.find(
@@ -59,6 +60,7 @@ function App() {
       };
 
       await updateDoc(userDoc, newField);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +76,9 @@ function App() {
   };
 
   const firebaseAdd = async (obj) => {
+    setIsLoading(true);
     await addDoc(userCollection, obj);
+    setIsLoading(false);
   };
 
   const AddUser = (e) => {
@@ -121,18 +125,39 @@ function App() {
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       try {
         const data = await getDocs(userCollection);
         console.log('im fired');
         if (data) {
           setUser(data.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
         }
+
         setFire(false);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     })();
   }, [fire]);
+
+  // if (isLoading) {
+  //   return (
+  //     <div
+  //       class='spinner-border'
+  //       style={{
+  //         display: 'grid',
+  //         placeItems: 'center',
+  //         height: '100vh',
+  //         width: '100vw',
+  //       }}
+  //       role='status'
+  //     >
+  //       <span class='sr-only'>Loading...</span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className='row'>
@@ -145,6 +170,7 @@ function App() {
           handleEdit={handleEdit}
           isEdited={isEdited}
           handleDeleteDoc={handleDeleteDoc}
+          isLoading={isLoading}
         />
       </div>
     </div>
