@@ -76,6 +76,7 @@ function App() {
   const firebaseAdd = async (obj) => {
     await addDoc(userCollection, obj);
   };
+
   const AddUser = (e) => {
     e.preventDefault();
     if (
