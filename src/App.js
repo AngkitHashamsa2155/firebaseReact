@@ -37,26 +37,29 @@ function App() {
     setFormInput(singleData);
   };
   const firebaseUpdate = async () => {
-    const userDoc = doc(db, 'user', editId);
-    const mapData = user.map((item) => {
-      if (item.id === editId) {
-        return {
-          ...item,
-          fullName: formInput.fullName,
-          mobile: formInput.mobile,
-          email: formInput.email,
-          address: formInput.address,
-        };
-      }
-      return item;
-    });
+    try {
+      const userDoc = doc(db, 'user', editId);
+      const mapData = user.map((item) => {
+        if (item.id === editId) {
+          return {
+            ...item,
+            fullName: formInput.fullName,
+            mobile: formInput.mobile,
+            email: formInput.email,
+            address: formInput.address,
+          };
+        }
+        return item;
+      });
 
-    const newField = mapData.find((item) => item.id === editId);
-    await updateDoc(userDoc, newField);
+      const newField = mapData.find((item) => item.id === editId);
+      await updateDoc(userDoc, newField);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleDeleteDoc = async (id) => {
-    console.log(id);
     try {
       await deleteDoc(doc(db, 'user', id));
       setFire(true);
@@ -83,6 +86,7 @@ function App() {
       setFire(true);
       setFormInput({
         ...formInput,
+
         fullName: '',
         mobile: '',
         email: '',
