@@ -9,6 +9,7 @@ export const Contact = ({
   handleEdit,
   isEdited,
   handleDeleteDoc,
+  isLoading,
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ export const Contact = ({
             formInput={formInput}
             AddUser={AddUser}
             isEdited={isEdited}
+            isLoading={isLoading}
           />
         </div>
         <section className='col-md-8'>
@@ -31,6 +33,7 @@ export const Contact = ({
             user={user}
             handleEdit={handleEdit}
             handleDeleteDoc={handleDeleteDoc}
+            isLoading={isLoading}
           />
         </section>
       </div>

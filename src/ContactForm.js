@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { FaUserAlt, FaMobileAlt, FaAddressCard } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 
-const ContactForm = ({ formInput, handleFormInput, AddUser, isEdited }) => {
+const ContactForm = ({
+  formInput,
+  handleFormInput,
+  AddUser,
+  isEdited,
+  isLoading,
+}) => {
   return (
     <form autoComplete='off' onSubmit={(e) => AddUser(e)}>
       <div className='form-group input-group '>
@@ -65,7 +71,7 @@ const ContactForm = ({ formInput, handleFormInput, AddUser, isEdited }) => {
           />
         </div>
       </div>
-      <button type='submit' className='btn btn-primary'>
+      <button disabled={isLoading} type='submit' className='btn btn-primary'>
         {isEdited ? 'edit' : 'submit'}
       </button>
     </form>
