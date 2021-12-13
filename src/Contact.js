@@ -1,16 +1,8 @@
 import React from 'react';
 import ContactForm from './ContactForm';
 import Result from './Result';
-export const Contact = ({
-  formInput,
-  handleFormInput,
-  AddUser,
-  user,
-  handleEdit,
-  isEdited,
-  handleDeleteDoc,
-  isLoading,
-}) => {
+
+export const Contact = () => {
   return (
     <>
       <div className='jumbotron jumbotron-fluid mt-5 rounded'>
@@ -20,21 +12,10 @@ export const Contact = ({
       </div>
       <div className='row'>
         <div className='col-md-4'>
-          <ContactForm
-            handleFormInput={handleFormInput}
-            formInput={formInput}
-            AddUser={AddUser}
-            isEdited={isEdited}
-            isLoading={isLoading}
-          />
+          <ContactForm />
         </div>
         <section className='col-md-8'>
-          <Result
-            user={user}
-            handleEdit={handleEdit}
-            handleDeleteDoc={handleDeleteDoc}
-            isLoading={isLoading}
-          />
+          <Result />
         </section>
       </div>
     </>

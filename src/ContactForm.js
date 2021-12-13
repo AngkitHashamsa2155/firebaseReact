@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { FaUserAlt, FaMobileAlt, FaAddressCard } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
-
-const ContactForm = ({
-  formInput,
-  handleFormInput,
-  AddUser,
-  isEdited,
-  isLoading,
-}) => {
+import { useUserContext } from './userContext';
+const ContactForm = () => {
+  const { formInput, handleFormInput, AddUser, isEdited, isLoading } =
+    useUserContext();
   return (
     <form autoComplete='off' onSubmit={(e) => AddUser(e)}>
       <div className='form-group input-group '>
