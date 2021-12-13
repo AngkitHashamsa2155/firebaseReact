@@ -31,24 +31,33 @@ function App() {
   const userCollection = collection(db, 'user');
 
   const handleEdit = (id) => {
-    let singleData = user.find((item) => item.id === id);
+    let { fullName, mobile, email, address } = user.find(
+      (item) => item.id === id
+    );
+
+    const newObject = { fullName, mobile, email, address };
     SetIsEdit(true);
     setEditId(id);
-    setFormInput(singleData);
+    setFormInput(newObject);
   };
+
   const firebaseUpdate = async () => {
     try {
       const userDoc = doc(db, 'user', editId);
 
-      const getData = user.find((item) => item.id === editId);
+      const { fullName, mobile, email, address } = user.find(
+        (item) => item.id === editId
+      );
+
+      const newObject = { fullName, mobile, email, address };
       const newField = {
-        ...getData,
+        ...newObject,
         fullName: formInput.fullName,
         mobile: formInput.mobile,
         email: formInput.email,
         address: formInput.address,
       };
-      console.log(newField);
+
       await updateDoc(userDoc, newField);
     } catch (error) {
       console.log(error);
@@ -77,17 +86,17 @@ function App() {
       isEdited
     ) {
       firebaseUpdate();
-      setEditId(null);
+
       SetIsEdit(false);
       setFire(true);
       setFormInput({
         ...formInput,
-
         fullName: '',
         mobile: '',
         email: '',
         address: '',
       });
+      setEditId(null);
     } else if (
       !formInput.fullName &&
       !formInput.email &&
@@ -95,12 +104,12 @@ function App() {
       !formInput.address &&
       !isEdited
     ) {
-      alert('this is empty');
+      alert('please Enter value as the input field is empty');
     } else {
       firebaseAdd(formInput);
       setFire(true);
+      setEditId(null);
       setFormInput({
-        ...formInput,
         fullName: '',
         mobile: '',
         email: '',
