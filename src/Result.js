@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-const Result = ({ user, handleEdit, deleteDoc }) => {
+const Result = ({ user, handleEdit, handleDeleteDoc }) => {
   return (
     <div>
       <table className='table'>
@@ -31,7 +31,7 @@ const Result = ({ user, handleEdit, deleteDoc }) => {
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => deleteDoc(id)}>
+                  <button onClick={() => handleDeleteDoc(id)}>
                     <FaTrash />
                   </button>
                 </td>

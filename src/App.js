@@ -19,6 +19,7 @@ function App() {
     email: '',
     address: '',
   });
+
   const [fire, setFire] = useState(false);
   const [isEdited, SetIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -54,10 +55,11 @@ function App() {
     await updateDoc(userDoc, newField);
   };
 
-  const deleteDoc = async (id) => {
+  const handleDeleteDoc = async (id) => {
+    console.log(id);
     try {
-      const userDoc = doc(db, 'user', 'Jr1GkI6cLTfgXFWeuHgl');
-      await deleteDoc(userDoc);
+      await deleteDoc(doc(db, 'user', id));
+      setFire(true);
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +134,7 @@ function App() {
           user={user}
           handleEdit={handleEdit}
           isEdited={isEdited}
-          deleteDoc={deleteDoc}
+          handleDeleteDoc={handleDeleteDoc}
         />
       </div>
     </div>

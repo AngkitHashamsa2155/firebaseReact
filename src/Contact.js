@@ -8,7 +8,7 @@ export const Contact = ({
   user,
   handleEdit,
   isEdited,
-  deleteDoc,
+  handleDeleteDoc,
 }) => {
   return (
     <>
@@ -27,7 +27,11 @@ export const Contact = ({
           />
         </div>
         <section className='col-md-8'>
-          <Result user={user} handleEdit={handleEdit} deleteDoc={deleteDoc} />
+          <Result
+            user={user}
+            handleEdit={handleEdit}
+            handleDeleteDoc={handleDeleteDoc}
+          />
         </section>
       </div>
     </>
